@@ -1,0 +1,18 @@
+{
+  "name": "on-premtocloud",
+  "version": "2.0.0",
+  "description": "Hrishikesh Joshi — Infrastructure to Azure Cloud Security Platform",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite --open",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": ["azure", "cloud", "vmware", "infrastructure", "dell"],
+  "author": "Hrishikesh Joshi",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "vite": "^8.0.14"
+  }
+}
