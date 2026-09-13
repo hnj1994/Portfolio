@@ -131,7 +131,7 @@ document.getElementById('root').innerHTML = `
 
         <!-- Frame counter (editorial) -->
         <div class="frame-counter" id="frame-counter" aria-hidden="true">
-          <span id="frame-num">001</span><span class="frame-slash"> / </span><span>300</span>
+          <span id="frame-num">001</span><span class="frame-slash"> / </span><span id="frame-total">300</span>
         </div>
       </div>
     </section>
