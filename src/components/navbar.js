@@ -2,6 +2,8 @@
  * Navbar — glassmorphism with scroll-triggered visibility
  */
 
+import { profile } from '../content.js';
+
 export function initNavbar() {
   const navbar = document.getElementById('navbar');
   if (!navbar) return;
@@ -15,13 +17,17 @@ export function initNavbar() {
   overlay.className = 'nav-mobile-overlay';
   overlay.id = 'nav-mobile-overlay';
   overlay.innerHTML = `
-    <a href="#infrastructure" class="nav-mobile-link" id="mob-infrastructure">Infrastructure</a>
-    <a href="#virtualization" class="nav-mobile-link" id="mob-virtualization">Virtualization</a>
-    <a href="#cloud" class="nav-mobile-link" id="mob-cloud">Cloud</a>
-    <a href="#security" class="nav-mobile-link" id="mob-security">Security</a>
-    <a href="#projects" class="nav-mobile-link" id="mob-projects">Projects</a>
+    <a href="#about" class="nav-mobile-link" id="mob-about" data-nav-target="about">About</a>
+    <a href="#experience" class="nav-mobile-link" id="mob-experience" data-nav-target="experience">Experience</a>
+    <a href="#skills" class="nav-mobile-link" id="mob-skills" data-nav-target="skills">Skills</a>
+    <a href="#projects" class="nav-mobile-link" id="mob-projects" data-nav-target="projects">Projects</a>
+    <a href="#contact" class="nav-mobile-link" id="mob-contact" data-nav-target="contact">Contact</a>
+    ${profile.links.resume ? `<a href="${profile.links.resume}" class="nav-mobile-link nav-mobile-resume" id="mob-resume" download>Download Resume</a>` : ''}
   `;
   document.body.appendChild(overlay);
+  overlay.querySelectorAll('[data-nav-target]').forEach(link => {
+    if (!document.getElementById(link.dataset.navTarget)) link.remove();
+  });
 
   // Close menu on mobile link click
   overlay.querySelectorAll('.nav-mobile-link').forEach(link => {

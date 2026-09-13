@@ -5,6 +5,8 @@ import { initPhaseOverlays } from './components/phaseOverlays.js';
 import { initFinalSection } from './components/finalSection.js';
 import { initParticles } from './components/particles.js';
 import { initCursor } from './components/cursor.js';
+import { renderProfileSections, contactLinks } from './components/profileSections.js';
+import { profile } from './content.js';
 
 document.getElementById('root').innerHTML = `
   <div class="app">
@@ -19,13 +21,15 @@ document.getElementById('root').innerHTML = `
       <div class="navbar-inner">
         <a href="#hero" class="nav-logo" id="nav-logo">HRISHIKESH JOSHI</a>
         <ul class="nav-links" role="list">
-          <li><a href="#infrastructure" class="nav-link" id="nav-infrastructure">Infrastructure</a></li>
-          <li><a href="#virtualization" class="nav-link" id="nav-virtualization">Virtualization</a></li>
-          <li><a href="#cloud" class="nav-link" id="nav-cloud">Cloud</a></li>
-          <li><a href="#security" class="nav-link" id="nav-security">Security</a></li>
-          <li><a href="#projects" class="nav-link" id="nav-projects">Projects</a></li>
+          <li><a href="#about" class="nav-link" id="nav-about" data-nav-target="about">About</a></li>
+          <li><a href="#experience" class="nav-link" id="nav-experience" data-nav-target="experience">Experience</a></li>
+          <li><a href="#skills" class="nav-link" id="nav-skills" data-nav-target="skills">Skills</a></li>
+          <li><a href="#projects" class="nav-link" id="nav-projects" data-nav-target="projects">Projects</a></li>
+          <li><a href="#contact" class="nav-link" id="nav-contact" data-nav-target="contact">Contact</a></li>
         </ul>
-        <a href="#projects" class="nav-cta" id="nav-cta">Explore Architecture</a>
+        ${profile.links.resume
+          ? `<a href="${profile.links.resume}" class="nav-cta" id="nav-cta" download>Download Resume</a>`
+          : `<a href="#contact" class="nav-cta" id="nav-cta">Get in Touch</a>`}
         <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
           <span></span><span></span><span></span>
         </button>
@@ -43,10 +47,10 @@ document.getElementById('root').innerHTML = `
           <span class="headline-line">for Scale.</span>
         </h1>
         <p class="hero-sub" id="hero-sub">From enterprise hardware to cloud-native security.</p>
-        <p class="hero-body" id="hero-body">A journey through modern infrastructure, virtualization, and Azure cloud architecture.</p>
+        <p class="hero-body" id="hero-body">${profile.shortTitle} · ${profile.location}. 11+ years running hybrid cloud, on-premises and Microsoft 365 environments for multi-client enterprises.</p>
         <div class="hero-ctas" id="hero-ctas">
-          <a href="#projects" class="btn-primary" id="btn-begin-journey">Begin the Journey</a>
-          <a href="#infrastructure" class="btn-ghost" id="btn-see-architecture">See Architecture →</a>
+          <a href="#about" class="btn-primary" id="btn-begin-journey">Begin the Journey</a>
+          <a href="#projects" class="btn-ghost" id="btn-see-architecture">See My Work →</a>
         </div>
       </div>
       <div class="scroll-indicator" id="scroll-indicator">
@@ -320,21 +324,27 @@ document.getElementById('root').innerHTML = `
       </div>
     </section>
 
-    <!-- Final CTA Section -->
-    <section class="final-section" id="projects" aria-labelledby="final-heading">
+    <!-- Recruiter-facing sections (rendered from src/content.js) -->
+    <div id="profile-sections"></div>
+
+    <!-- Contact / Final CTA Section -->
+    <section class="final-section" id="contact" aria-labelledby="final-heading">
       <div class="final-bg-glow"></div>
       <div class="final-content">
-        <div class="final-eyebrow">The Complete Platform</div>
+        <div class="final-eyebrow">Let's Work Together</div>
         <h2 class="final-headline" id="final-heading">
           <span class="final-word" id="fw1">Create.</span>
           <span class="final-word gradient-text" id="fw2">Sustain.</span>
           <span class="final-word" id="fw3">Secure.</span>
         </h2>
-        <p class="final-sub">Infrastructure, Virtualization, Cloud, and Security—<br>unified into a single vision.</p>
+        <p class="final-sub">Looking for someone who can take infrastructure from the rack to the cloud, securely?<br>I'd love to hear about the role.</p>
         <div class="final-ctas">
-          <a href="#hero" class="btn-primary large" id="btn-explore-projects">Explore My Projects</a>
-          <a href="#cloud" class="btn-ghost large" id="btn-view-arch">View Architecture →</a>
+          ${profile.links.email ? `<a href="mailto:${profile.links.email}" class="btn-primary large" id="btn-email-me">Email Me</a>` : ''}
+          ${profile.links.resume ? `<a href="${profile.links.resume}" class="btn-ghost large" id="btn-download-resume" download>Download Resume →</a>` : ''}
         </div>
+        <ul class="contact-links" id="contact-links" role="list">
+          ${contactLinks().map(c => `<li><a href="${c.href}" class="contact-link" id="contact-${c.label.toLowerCase()}"${c.external ? ' target="_blank" rel="noopener noreferrer"' : ''}><span class="contact-label">${c.label}</span><span class="contact-value">${c.value}</span></a></li>`).join('')}
+        </ul>
         <div class="final-badges">
           <div class="badge" id="badge-azure">
             <svg viewBox="0 0 20 20" fill="#0078D4"><path d="M11.5 2L6 13h4l-1.5 5L18 8h-4.5L11.5 2z"/></svg>
@@ -356,19 +366,25 @@ document.getElementById('root').innerHTML = `
     <footer class="footer" role="contentinfo">
       <div class="footer-inner">
         <div class="footer-left">
-          <span class="footer-name">Hrishikesh Joshi</span>
-          <span class="footer-role">Cloud & Infrastructure Architect</span>
+          <span class="footer-name">${profile.name}</span>
+          <span class="footer-role">${profile.title}</span>
         </div>
         <div class="footer-center">
           <span>Infrastructure → Virtualization → Cloud → Security</span>
         </div>
         <div class="footer-right">
-          <span>© 2026 Hrishikesh Joshi</span>
+          <nav class="footer-links" aria-label="Footer links">
+            ${contactLinks().map(c => `<a href="${c.href}"${c.external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${c.label}</a>`).join('')}
+          </nav>
+          <span>© ${new Date().getFullYear()} ${profile.name}</span>
         </div>
       </div>
     </footer>
   </div>
 `;
+
+// Render data-driven sections first so the observers below can find them
+renderProfileSections();
 
 // Init all modules
 initCursor();
