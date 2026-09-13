@@ -1,0 +1,36 @@
+{
+  "count": 242,
+  "width": 1280,
+  "phases": [
+    {
+      "key": "hardware",
+      "label": "Hardware",
+      "start": 1,
+      "end": 66
+    },
+    {
+      "key": "explosion",
+      "label": "Deconstruction",
+      "start": 67,
+      "end": 122
+    },
+    {
+      "key": "vmware",
+      "label": "Virtualization",
+      "start": 123,
+      "end": 170
+    },
+    {
+      "key": "azure",
+      "label": "Cloud",
+      "start": 171,
+      "end": 218
+    },
+    {
+      "key": "security",
+      "label": "Security",
+      "start": 219,
+      "end": 242
+    }
+  ]
+}
