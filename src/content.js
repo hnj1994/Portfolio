@@ -5,6 +5,9 @@
  * Credentials and Contact sections. Sections whose arrays are empty
  * are hidden automatically. The resume served at /resume.pdf lives in
  * /public — replace that file to update the download.
+ *
+ * In experience bullets and project text, **wrap a metric in asterisks**
+ * to render it bold.
  */
 
 export const profile = {
@@ -14,18 +17,39 @@ export const profile = {
   tagline: 'Infrastructure. Engineered for Scale.',
   location: 'Pune, India',
   availability: 'Open to opportunities',   // set to '' to hide the badge
+
+  /**
+   * Drop a headshot at public/profile.jpg (square, 400px or larger) and set
+   * photo: '/profile.jpg'. While this is empty an initials monogram is shown.
+   */
+  photo: '',
+
+  /**
+   * Answers the first question a recruiter has. Edit freely; `notice` is
+   * hidden while empty, so fill in your real notice period.
+   */
+  lookingFor: {
+    roles: 'Cloud Architect, Azure Infrastructure Lead or Senior Systems Administrator',
+    location: 'Pune or remote',
+    notice: '',        // e.g. '30 days'
+  },
+
   summary: [
     'Senior Systems Administrator with 11+ years of enterprise infrastructure experience across hybrid cloud, on-premises and Microsoft 365 environments, and an Azure Solutions Architect Expert (AZ-305).',
     'I take deep, hands-on ownership of Azure compute, networking, hybrid identity (Microsoft Entra ID, Conditional Access, MFA), BCDR with Azure Site Recovery, and endpoint security across a multi-client managed-services portfolio spanning pharmaceutical, manufacturing, renewable energy and software companies.',
     'My track record includes ransomware recovery at scale, automated CVE remediation pipelines, Azure cost governance against BOQ commitments, OT/IT integration under GxP, and pre-sales solution architecture that pairs technical delivery with customer-facing documentation and governance.',
   ],
-  // Four quick facts shown beside the summary. Short `value`, one-line `label`.
+
+  // Proof points shown beside the summary. Every figure here comes from the CV.
   highlights: [
-    { value: '11+', label: 'Years in enterprise infrastructure', sub: 'Hybrid cloud · on-premises · Microsoft 365' },
+    { value: '11+ yrs', label: 'Enterprise infrastructure', sub: 'Hybrid cloud · on-premises · Microsoft 365' },
     { value: '500+', label: 'Servers at 99.9% availability', sub: '1,000+ users across a multi-client portfolio' },
+    { value: '100+', label: 'Servers recovered from ransomware', sub: 'Rebuilt, hardened and restored to operations' },
     { value: '10+', label: 'Client environments on hybrid identity', sub: 'Entra ID · Conditional Access · MFA · Zero Trust' },
+    { value: '245', label: 'Endpoint Defender estate owned', sub: 'Daily fleet-health reporting and remediation' },
     { value: '6', label: 'Microsoft & Cisco certifications', sub: 'AZ-305 · AZ-104 · AZ-800/801 · MS-102 · MS-203' },
   ],
+
   links: {
     email: 'joshihrishikesh42@gmail.com',
     linkedin: 'https://www.linkedin.com/in/hrishikesh-joshi-334b08159',
@@ -62,7 +86,11 @@ export const skills = [
   },
 ];
 
-/** Work history, most recent first. */
+/**
+ * Work history, most recent first. The first `visibleBullets` entries show by
+ * default and the rest sit behind a "Show more" toggle, so the section stays
+ * skimmable. Lead each bullet with the outcome.
+ */
 export const experience = [
   {
     role: 'Senior Systems Administrator & Cloud Architect',
@@ -70,18 +98,19 @@ export const experience = [
     location: 'Pune, India',
     start: 'Jan 2021',
     end: 'Present',
+    visibleBullets: 5,
     bullets: [
-      'Design, deploy and operate enterprise infrastructure across Microsoft Azure and private cloud for a multi-client portfolio spanning pharmaceutical, manufacturing, renewable energy and software companies: 1,000+ users and 500+ servers at 99.9% availability.',
-      'Architected Azure VM Scale Sets in flexible orchestration mode with golden-image creation, versioning and automated patch lifecycle management, cutting manual provisioning effort and standardizing deployments.',
-      'Led Azure Site Recovery implementation for business-critical workloads: replication policy design, failover testing and BCDR documentation, improving RTO/RPO posture and compliance readiness.',
-      'Implemented hybrid identity with Azure AD Connect (Password Hash Sync) across 10+ client environments; designed Conditional Access and MFA policies enforcing Zero Trust with no user productivity impact.',
-      'Led ransomware recovery of 100+ compromised servers: rebuilt and hardened Windows security baselines, deployed next-generation antivirus and rolled out Zscaler proxy across 500+ endpoints through to full restoration of operations.',
-      'Designed and POC-validated a multi-tenant Database Activity Monitoring solution on OpenSearch with document-level security and agentless WEF/OpenWEC log collection from SQL Server.',
-      'Drove an Intune co-management exit for a Microsoft Entra hybrid-joined Windows 11 fleet: ConfigMgr client removal and native Update Ring policy inside an AppLocker/WDAC-restricted environment where PowerShell execution is blocked.',
-      'Operate daily Microsoft Defender Antivirus fleet-health reporting across a 245-endpoint estate; diagnosed definition-update failures including a TLS/network-path fault in the Windows Update Agent channel.',
-      'Own Azure cost governance for client subscriptions: monthly BOQ-to-actual reconciliation and variance tracking across DDoS Protection, Azure Site Recovery, bandwidth and reserved instances.',
-      'Executing a P2V migration of a physical industrial PC to Hyper-V for a GxP-regulated pharmaceutical OT environment, resolving cross-subnet SCADA polling and OT/IT network segmentation.',
-      'Monitor estate health with Zabbix, PRTG, LogRhythm SIEM and Azure Monitor; automate provisioning with PowerShell, Terraform and ARM/Bicep.',
+      'Run enterprise infrastructure across Microsoft Azure and private cloud for a multi-client portfolio of **1,000+ users and 500+ servers at 99.9% availability**, spanning pharmaceutical, manufacturing, renewable energy and software companies.',
+      'Restored operations after a ransomware attack on **100+ compromised servers**: rebuilt and hardened Windows security baselines, deployed next-generation antivirus and rolled out Zscaler proxy across 500+ endpoints.',
+      'Improved RTO/RPO posture and compliance readiness by architecting **Azure Site Recovery** for business-critical workloads, covering replication policy design, failover testing and BCDR documentation.',
+      'Delivered hybrid identity across **10+ client environments** with Azure AD Connect, designing Conditional Access and MFA policies that enforce Zero Trust with no user productivity impact.',
+      'Cut manual provisioning effort and standardised deployments with **Azure VM Scale Sets** in flexible orchestration mode, including golden-image creation, versioning and automated patch lifecycle management.',
+      'Own Azure cost governance for client subscriptions through monthly **BOQ-to-actual reconciliation** and variance tracking across DDoS Protection, Azure Site Recovery, bandwidth and reserved instances.',
+      'Operate daily Microsoft Defender fleet-health reporting across a **245-endpoint estate**, and diagnosed definition-update failures including a TLS and network-path fault in the Windows Update Agent channel.',
+      'Designed and POC-validated a multi-tenant **Database Activity Monitoring** solution on OpenSearch with document-level security and agentless WEF/OpenWEC log collection from SQL Server.',
+      'Drove an **Intune co-management exit** for a Microsoft Entra hybrid-joined Windows 11 fleet: ConfigMgr client removal and native Update Ring policy inside an AppLocker and WDAC restricted environment where PowerShell execution is blocked.',
+      'Executing a **P2V migration** of a physical industrial PC to Hyper-V for a GxP-regulated pharmaceutical OT environment, resolving cross-subnet SCADA polling and OT/IT network segmentation.',
+      'Monitor estate health with Zabbix, PRTG, LogRhythm SIEM and Azure Monitor, and automate provisioning with PowerShell, Terraform and ARM/Bicep.',
     ],
     tech: ['Azure', 'Entra ID', 'Azure Site Recovery', 'VMSS', 'Intune', 'Defender', 'Zscaler', 'Terraform', 'Bicep', 'PowerShell', 'Hyper-V'],
   },
@@ -91,15 +120,16 @@ export const experience = [
     location: 'Pune, India',
     start: 'Jan 2016',
     end: 'May 2021',
+    visibleBullets: 5,
     bullets: [
-      'Managed and monitored Windows Server 2008/2012 environments, ensuring continuous availability, optimal performance and security compliance.',
-      'Administered Active Directory users and groups, enforcing Group Policy Objects and access controls aligned with organizational security standards.',
-      'Deployed OS and application patches with ManageEngine Desktop Central, maintaining endpoint compliance and reducing vulnerability exposure across the enterprise.',
-      'Executed system image deployments with Windows Deployment Services and Microsoft Deployment Toolkit, standardizing endpoint configurations across 500+ devices.',
-      'Administered enterprise backup operations on IBM Tivoli Storage Manager and a TS2900 tape library, ensuring data protection and recovery readiness.',
-      'Managed and tracked IT service requests and incidents in ManageEngine ServiceDesk Plus, maintaining SLA adherence and service quality.',
-      'Coordinated with hardware and network vendors to resolve escalated infrastructure issues, minimizing business impact from outages.',
-      'Provided remote technical support for enterprise users across India, resolving OS, application, networking and security incidents.',
+      'Kept **Windows Server 2008/2012** environments continuously available, performant and security-compliant across the plant estate.',
+      'Standardised endpoint builds across **500+ devices** with Windows Deployment Services and the Microsoft Deployment Toolkit.',
+      'Reduced vulnerability exposure enterprise-wide by deploying OS and application patches through **ManageEngine Desktop Central**.',
+      'Guaranteed recovery readiness by administering enterprise backups on **IBM Tivoli Storage Manager** and a TS2900 tape library.',
+      'Enforced access control by administering **Active Directory** users and groups with Group Policy Objects aligned to security standards.',
+      'Maintained SLA adherence by managing and tracking IT service requests and incidents in ManageEngine ServiceDesk Plus.',
+      'Minimised outage impact by coordinating with hardware and network vendors to resolve escalated infrastructure issues.',
+      'Resolved OS, application, networking and security incidents for enterprise users across India over remote support.',
     ],
     tech: ['Windows Server', 'Active Directory', 'GPO', 'ManageEngine', 'WDS / MDT', 'IBM TSM', 'ServiceDesk Plus'],
   },

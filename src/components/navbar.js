@@ -21,6 +21,7 @@ export function initNavbar() {
     <a href="#experience" class="nav-mobile-link" id="mob-experience" data-nav-target="experience">Experience</a>
     <a href="#skills" class="nav-mobile-link" id="mob-skills" data-nav-target="skills">Skills</a>
     <a href="#projects" class="nav-mobile-link" id="mob-projects" data-nav-target="projects">Projects</a>
+    <a href="#architecture" class="nav-mobile-link" id="mob-architecture" data-nav-target="architecture">Architecture</a>
     <a href="#contact" class="nav-mobile-link" id="mob-contact" data-nav-target="contact">Contact</a>
     ${profile.links.resume ? `<a href="${profile.links.resume}" class="nav-mobile-link nav-mobile-resume" id="mob-resume" download>Download Resume</a>` : ''}
   `;
