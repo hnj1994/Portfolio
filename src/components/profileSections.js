@@ -22,7 +22,7 @@ const initials = (name = '') => name.trim().split(/\s+/).map(w => w[0]).join('')
 
 function photoBlock() {
   const inner = profile.photo
-    ? `<img src="${esc(profile.photo)}" alt="${esc(profile.name)}" width="112" height="112" loading="lazy" />`
+    ? `<img src="${esc(profile.photo)}" alt="${esc(profile.name)}" width="112" height="112" loading="eager" decoding="async" />`
     : `<span class="about-monogram" aria-hidden="true">${esc(initials(profile.name))}</span>`;
   return `<div class="about-photo" id="about-photo">${inner}</div>`;
 }

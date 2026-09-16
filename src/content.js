@@ -19,10 +19,10 @@ export const profile = {
   availability: 'Open to opportunities',   // set to '' to hide the badge
 
   /**
-   * Drop a headshot at public/profile.jpg (square, 400px or larger) and set
-   * photo: '/profile.jpg'. While this is empty an initials monogram is shown.
+   * Headshot at public/profile.jpg, cropped square. Set this to '' to fall
+   * back to an initials monogram.
    */
-  photo: '',
+  photo: '/profile.jpg',
 
   /**
    * Answers the first question a recruiter has. Edit freely; `notice` is
