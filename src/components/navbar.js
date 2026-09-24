@@ -23,7 +23,7 @@ export function initNavbar() {
     <a href="#projects" class="nav-mobile-link" id="mob-projects" data-nav-target="projects">Projects</a>
     <a href="#architecture" class="nav-mobile-link" id="mob-architecture" data-nav-target="architecture">Architecture</a>
     <a href="#contact" class="nav-mobile-link" id="mob-contact" data-nav-target="contact">Contact</a>
-    ${profile.links.resume ? `<a href="${profile.links.resume}" class="nav-mobile-link nav-mobile-resume" id="mob-resume" download>Download Resume</a>` : ''}
+    ${profile.links.resume ? `<a href="${profile.links.resume}" class="nav-mobile-link nav-mobile-resume" id="mob-resume" download="${profile.links.resumeFileName || ''}">Download Resume</a>` : ''}
   `;
   document.body.appendChild(overlay);
   overlay.querySelectorAll('[data-nav-target]').forEach(link => {
@@ -42,15 +42,21 @@ export function initNavbar() {
     });
   }
 
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menuOpen) { closeMenu(); hamburger?.focus(); }
+  });
+
   function openMenu() {
     menuOpen = true;
     overlay.classList.add('open');
-    hamburger?.querySelector('span:nth-child(1)') && styleHamburger(true);
+    hamburger?.setAttribute('aria-expanded', 'true');
+    styleHamburger(true);
   }
 
   function closeMenu() {
     menuOpen = false;
     overlay.classList.remove('open');
+    hamburger?.setAttribute('aria-expanded', 'false');
     styleHamburger(false);
   }
 

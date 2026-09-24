@@ -22,9 +22,9 @@ document.getElementById('root').innerHTML = `
           <li><a href="#contact" class="nav-link" id="nav-contact" data-nav-target="contact">Contact</a></li>
         </ul>
         ${profile.links.resume
-          ? `<a href="${profile.links.resume}" class="nav-cta" id="nav-cta" download>Download Resume</a>`
+          ? `<a href="${profile.links.resume}" class="nav-cta" id="nav-cta" download="${profile.links.resumeFileName || ''}">Download Resume</a>`
           : `<a href="#contact" class="nav-cta" id="nav-cta">Get in Touch</a>`}
-        <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile-overlay">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -155,7 +155,7 @@ document.getElementById('root').innerHTML = `
         <p class="final-sub">Looking for someone who can take infrastructure from the rack to the cloud, securely?<br>I'd love to hear about the role.</p>
         <div class="final-ctas">
           ${profile.links.email ? `<a href="mailto:${profile.links.email}" class="btn-primary large" id="btn-email-me">Email Me</a>` : ''}
-          ${profile.links.resume ? `<a href="${profile.links.resume}" class="btn-ghost large" id="btn-download-resume" download>Download Resume →</a>` : ''}
+          ${profile.links.resume ? `<a href="${profile.links.resume}" class="btn-ghost large" id="btn-download-resume" download="${profile.links.resumeFileName || ''}">Download Resume →</a>` : ''}
         </div>
         <ul class="contact-links" id="contact-links" role="list">
           ${contactLinks().map(c => `<li><a href="${c.href}" class="contact-link" id="contact-${c.label.toLowerCase()}"${c.external ? ' target="_blank" rel="noopener noreferrer"' : ''}><span class="contact-label">${c.label}</span><span class="contact-value">${c.value}</span></a></li>`).join('')}

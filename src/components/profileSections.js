@@ -66,7 +66,7 @@ function aboutSection() {
             ${lookingForBlock()}
             ${paragraphs}
             <div class="hero-ctas about-ctas">
-              ${profile.links.resume ? `<a href="${esc(profile.links.resume)}" class="btn-primary" id="btn-about-resume" download>Download Resume</a>` : ''}
+              ${profile.links.resume ? `<a href="${esc(profile.links.resume)}" class="btn-primary" id="btn-about-resume" download="${profile.links.resumeFileName || ''}">Download Resume</a>` : ''}
               <a href="#contact" class="btn-ghost" id="btn-about-contact">Get in touch</a>
             </div>
           </div>

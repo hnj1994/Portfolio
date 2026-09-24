@@ -3,12 +3,18 @@
  * Shows/hides overlay panels based on scroll progress
  */
 
-// Phase triggers (0–1 progress)
+import manifest from '../frames.json';
+
+// Phase triggers (0–1 progress), derived from the frame manifest so the
+// panels switch on the same frames as the animation and progress label.
+// The hardware panel stays up through the deconstruction frames.
+const toProgress = frame => (frame - 1) / (manifest.count - 1);
+const startOf = key => toProgress(manifest.phases.find(p => p.key === key).start);
 const PHASE_MAP = [
-  { id: 'phase-1', from: 0,    to: 0.35 },
-  { id: 'phase-2', from: 0.35, to: 0.58 },
-  { id: 'phase-3', from: 0.58, to: 0.78 },
-  { id: 'phase-4', from: 0.78, to: 1.0  },
+  { id: 'phase-1', from: 0,                   to: startOf('vmware')   },
+  { id: 'phase-2', from: startOf('vmware'),   to: startOf('azure')    },
+  { id: 'phase-3', from: startOf('azure'),    to: startOf('security') },
+  { id: 'phase-4', from: startOf('security'), to: 1.01                },
 ];
 
 export function initPhaseOverlays() {

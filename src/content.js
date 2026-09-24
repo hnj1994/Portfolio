@@ -55,6 +55,7 @@ export const profile = {
     linkedin: 'https://www.linkedin.com/in/hrishikesh-joshi-334b08159',
     github: 'https://github.com/hnj1994',
     resume: '/resume.pdf',
+    resumeFileName: 'Hrishikesh-Joshi-Resume.pdf',   // name the file gets when downloaded
   },
   siteUrl: 'https://portfolio-hnj1994s-projects.vercel.app',
 };
