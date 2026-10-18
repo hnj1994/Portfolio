@@ -35,25 +35,11 @@ export function initFinalSection() {
   const finalObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Staggered reveal
-        if (finalEyebrow) {
-          setTimeout(() => finalEyebrow.classList.add('animate-in'), 100);
-        }
-        finalWords.forEach((word, i) => {
-          setTimeout(() => word.classList.add('animate-in'), 200 + i * 120);
-        });
-        if (finalSub) {
-          setTimeout(() => finalSub.classList.add('animate-in'), 200 + finalWords.length * 120);
-        }
-        if (finalCtas) {
-          setTimeout(() => finalCtas.classList.add('animate-in'), 350 + finalWords.length * 120);
-        }
-        if (finalLinks) {
-          setTimeout(() => finalLinks.classList.add('animate-in'), 450 + finalWords.length * 120);
-        }
-        if (finalBadges) {
-          setTimeout(() => finalBadges.classList.add('animate-in'), 550 + finalWords.length * 120);
-        }
+        // Staggered reveal, in reading order. The stagger lives here only;
+        // the CSS transitions carry no delays of their own.
+        [finalEyebrow, ...finalWords, finalSub, finalCtas, finalLinks, finalBadges]
+          .filter(Boolean)
+          .forEach((el, i) => setTimeout(() => el.classList.add('animate-in'), i * 80));
         finalObserver.unobserve(entry.target);
       }
     });
