@@ -185,7 +185,7 @@ export function initScrollSequence() {
     // Re-prioritise in-flight queue toward the current position.
     if (queue.length) pump();
 
-    if (progressFill) progressFill.style.width = (progress * 100) + '%';
+    if (progressFill) progressFill.style.transform = `scaleX(${progress})`;
     if (progLabel) {
       const phase = PHASES.find(p => targetFrame >= p.start && targetFrame <= p.end);
       progLabel.textContent = phase ? phase.label : PHASES[0].label;

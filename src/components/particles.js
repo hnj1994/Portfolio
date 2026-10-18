@@ -6,6 +6,8 @@
 export function initParticles() {
   const canvas = document.getElementById('particle-canvas');
   if (!canvas) return;
+  // Decorative drift only — skip it entirely for reduced motion
+  if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
 
   const ctx = canvas.getContext('2d');
 

@@ -91,8 +91,6 @@ export function initNavbar() {
     }
   }, { passive: true });
 
-  // Show navbar after 800ms on initial load
-  setTimeout(() => {
-    navbar.classList.add('visible');
-  }, 800);
+  // Pick up the right state on load (e.g. a reload part-way down the page)
+  updateNavbar();
 }
