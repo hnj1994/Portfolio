@@ -57,11 +57,19 @@
 
   /* Motion */
   --nav-height: 52px;
+  /* One strong ease-out for everything that enters, exits or lifts; hovers
+     and colour changes use plain `ease`, constant loops `ease-in-out`. */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --dur-press: 160ms;
-  --dur-hover: 200ms;
-  --dur-lift: 300ms;
+  --dur-press: 160ms;   /* button press */
+  --dur-hover: 200ms;   /* colour, border, background */
+  --dur-menu: 250ms;    /* mobile menu sheet */
+  --dur-lift: 300ms;    /* card hover lift, menu links */
+  --dur-panel: 500ms;   /* scroll-sequence phase panels */
+  --dur-enter: 600ms;   /* contact section entrance */
+  --dur-reveal: 700ms;  /* scroll reveals, headline words */
+  --dur-hero: 800ms;    /* first-paint hero entrance */
+  --dur-loop: 2.4s;     /* ambient loops (scroll cue, status dot) */
+  --stagger-menu: 40ms; /* per-link delay in the mobile menu */
 }
 
 /* No global smooth scroll: src/components/anchorScroll.js glides short
@@ -286,7 +294,7 @@ body::before {
   margin-bottom: 20px;
   opacity: 0;
   transform: translateY(16px);
-  animation: fadeUp 0.8s var(--ease-out) 0.1s forwards;
+  animation: fadeUp var(--dur-hero) var(--ease-out) 0.1s forwards;
 }
 
 .hero-headline {
@@ -304,7 +312,7 @@ body::before {
   display: block;
   opacity: 0;
   transform: translateY(48px);
-  animation: fadeUp 0.8s var(--ease-out) forwards;
+  animation: fadeUp var(--dur-hero) var(--ease-out) forwards;
 }
 
 .headline-line:nth-child(1) { animation-delay: 0.18s; }
@@ -326,7 +334,7 @@ body::before {
   color: var(--white-95);
   margin-bottom: 14px;
   opacity: 0;
-  animation: fadeUp 0.8s var(--ease-out) 0.46s forwards;
+  animation: fadeUp var(--dur-hero) var(--ease-out) 0.46s forwards;
 }
 
 .hero-body {
@@ -336,7 +344,7 @@ body::before {
   color: var(--white-65);
   margin-bottom: 40px;
   opacity: 0;
-  animation: fadeUp 0.8s var(--ease-out) 0.52s forwards;
+  animation: fadeUp var(--dur-hero) var(--ease-out) 0.52s forwards;
 }
 
 .hero-ctas {
@@ -346,7 +354,7 @@ body::before {
   justify-content: center;
   flex-wrap: wrap;
   opacity: 0;
-  animation: fadeUp 0.8s var(--ease-out) 0.58s forwards;
+  animation: fadeUp var(--dur-hero) var(--ease-out) 0.58s forwards;
 }
 
 /* ============================================================
@@ -419,7 +427,7 @@ body::before {
   align-items: center;
   gap: 10px;
   opacity: 0;
-  animation: fadeUp 0.8s var(--ease-out) 1s forwards;
+  animation: fadeUp var(--dur-hero) var(--ease-out) 1s forwards;
 }
 
 .scroll-line {
@@ -427,7 +435,7 @@ body::before {
   height: 40px;
   background: linear-gradient(to bottom, var(--azure-light), transparent);
   transform-origin: top;
-  animation: scrollPulse 2.4s ease-in-out infinite;
+  animation: scrollPulse var(--dur-loop) ease-in-out infinite;
 }
 
 .scroll-indicator span {
@@ -496,7 +504,7 @@ body::before {
   background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%), rgba(18,18,20,0.5);
   opacity: 0;
   transform: translateX(-16px) scale(0.98);
-  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+  transition: opacity var(--dur-panel) var(--ease-out), transform var(--dur-panel) var(--ease-out);
   pointer-events: none;
 }
 
@@ -760,7 +768,7 @@ body::before {
   margin-bottom: 20px;
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+  transition: opacity var(--dur-enter) var(--ease-out), transform var(--dur-enter) var(--ease-out);
 }
 
 .final-headline {
@@ -779,7 +787,7 @@ body::before {
   display: block;
   opacity: 0;
   transform: translateY(32px);
-  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+  transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
 }
 
 .final-sub {
@@ -790,7 +798,7 @@ body::before {
   margin-bottom: 44px;
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+  transition: opacity var(--dur-enter) var(--ease-out), transform var(--dur-enter) var(--ease-out);
 }
 
 .final-ctas {
@@ -800,7 +808,7 @@ body::before {
   flex-wrap: wrap;
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+  transition: opacity var(--dur-enter) var(--ease-out), transform var(--dur-enter) var(--ease-out);
 }
 
 .final-badges {
@@ -810,7 +818,7 @@ body::before {
   flex-wrap: wrap;
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+  transition: opacity var(--dur-enter) var(--ease-out), transform var(--dur-enter) var(--ease-out);
 }
 
 .final-eyebrow.animate-in,
@@ -910,8 +918,8 @@ body::before {
   opacity: 0;
   translate: 0 28px;
   transition:
-    opacity 700ms var(--ease-out),
-    translate 700ms var(--ease-out),
+    opacity var(--dur-reveal) var(--ease-out),
+    translate var(--dur-reveal) var(--ease-out),
     transform var(--dur-lift) var(--ease-out),
     border-color var(--dur-hover) ease,
     box-shadow var(--dur-hover) ease;
@@ -996,14 +1004,14 @@ body::before {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 250ms var(--ease-out), visibility 0s linear 250ms;
+  transition: opacity var(--dur-menu) var(--ease-out), visibility 0s linear var(--dur-menu);
 }
 
 .nav-mobile-overlay.open {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transition: opacity 250ms var(--ease-out), visibility 0s;
+  transition: opacity var(--dur-menu) var(--ease-out), visibility 0s;
 }
 
 .nav-mobile-link {
@@ -1015,21 +1023,21 @@ body::before {
   letter-spacing: -0.025em;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 200ms ease, transform 200ms var(--ease-out), color var(--dur-hover) ease;
+  transition: opacity var(--dur-hover) ease, transform var(--dur-hover) var(--ease-out), color var(--dur-hover) ease;
 }
 
 .nav-mobile-overlay.open .nav-mobile-link {
   opacity: 1;
   transform: none;
-  transition: opacity 300ms var(--ease-out), transform 400ms var(--ease-out), color var(--dur-hover) ease;
+  transition: opacity var(--dur-lift) var(--ease-out), transform var(--dur-lift) var(--ease-out), color var(--dur-hover) ease;
 }
 
-.nav-mobile-overlay.open .nav-mobile-link:nth-child(2) { transition-delay: 40ms; }
-.nav-mobile-overlay.open .nav-mobile-link:nth-child(3) { transition-delay: 80ms; }
-.nav-mobile-overlay.open .nav-mobile-link:nth-child(4) { transition-delay: 120ms; }
-.nav-mobile-overlay.open .nav-mobile-link:nth-child(5) { transition-delay: 160ms; }
-.nav-mobile-overlay.open .nav-mobile-link:nth-child(6) { transition-delay: 200ms; }
-.nav-mobile-overlay.open .nav-mobile-link:nth-child(7) { transition-delay: 240ms; }
+.nav-mobile-overlay.open .nav-mobile-link:nth-child(2) { transition-delay: calc(var(--stagger-menu) * 1); }
+.nav-mobile-overlay.open .nav-mobile-link:nth-child(3) { transition-delay: calc(var(--stagger-menu) * 2); }
+.nav-mobile-overlay.open .nav-mobile-link:nth-child(4) { transition-delay: calc(var(--stagger-menu) * 3); }
+.nav-mobile-overlay.open .nav-mobile-link:nth-child(5) { transition-delay: calc(var(--stagger-menu) * 4); }
+.nav-mobile-overlay.open .nav-mobile-link:nth-child(6) { transition-delay: calc(var(--stagger-menu) * 5); }
+.nav-mobile-overlay.open .nav-mobile-link:nth-child(7) { transition-delay: calc(var(--stagger-menu) * 6); }
 
 .nav-mobile-link:hover { color: var(--cyan); }
 .nav-mobile-link.nav-mobile-resume { color: var(--azure-light); }
@@ -1098,7 +1106,7 @@ body::before {
   border-radius: 50%;
   background: var(--green);
   box-shadow: 0 0 0 0 rgba(48,209,88,0.5);
-  animation: pulseDot 2.4s ease-out infinite;
+  animation: pulseDot var(--dur-loop) ease-out infinite;
 }
 
 @keyframes pulseDot {
@@ -1312,7 +1320,7 @@ body::before {
   max-width: 900px;
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+  transition: opacity var(--dur-enter) var(--ease-out), transform var(--dur-enter) var(--ease-out);
 }
 
 .contact-links.animate-in { opacity: 1; transform: none; }
