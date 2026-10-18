@@ -64,8 +64,10 @@
   --dur-lift: 300ms;
 }
 
+/* No global smooth scroll: src/components/anchorScroll.js glides short
+   jumps and lands long ones instantly, so nav links never scrub the
+   600vh sequence. */
 html {
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
@@ -99,6 +101,9 @@ img {
   outline-offset: 3px;
   border-radius: 8px;
 }
+
+/* Sections receive programmatic focus after an anchor jump; no ring there */
+section[tabindex="-1"]:focus { outline: none; }
 
 /* Ambient light that the glass surfaces pick up and blur. Lives on body
    (not .app) so it never creates a stacking context that would trap the
@@ -1479,7 +1484,6 @@ body::before {
    ACCESSIBILITY — reduced motion, reduced transparency, contrast
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   /* Keep opacity and colour feedback; drop movement and delays. */
   *, *::before, *::after {
     animation-delay: 0s !important;

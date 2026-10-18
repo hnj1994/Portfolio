@@ -4,6 +4,7 @@ import { initScrollSequence } from './components/scrollSequence.js';
 import { initPhaseOverlays } from './components/phaseOverlays.js';
 import { initFinalSection } from './components/finalSection.js';
 import { initParticles } from './components/particles.js';
+import { initAnchorScroll } from './components/anchorScroll.js';
 import { renderProfileSections, contactLinks } from './components/profileSections.js';
 import { profile } from './content.js';
 
@@ -207,3 +208,4 @@ initScrollSequence();
 initPhaseOverlays();
 initFinalSection();
 initParticles();
+initAnchorScroll();
